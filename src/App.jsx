@@ -2,6 +2,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import Features from './components/Features/Features';
+import Testimonials from './components/Testimonials/Testimonials';
+
 function App() {
   return (
     <div className="App">
@@ -12,25 +14,7 @@ function App() {
 
         <Features />
 
-        <section id="testimonials">
-          <div className="section-container">
-            <h2>お客様の声</h2>
-            <div className="testimonial-container">
-              <div className="testimonial">
-                <p>"この製品は私の生活を劇的に変えました。毎日が楽しくなります。"</p>
-                <cite>- 田中 花子さん</cite>
-              </div>
-              <div className="testimonial">
-                <p>"使いやすさが抜群です。他の製品とは比べものになりません。"</p>
-                <cite>- 佐藤 太郎さん</cite>
-              </div>
-              <div className="testimonial">
-                <p>"サポートの質が素晴らしい。困ったときにいつでも頼れるのが心強いです。"</p>
-                <cite>- 鈴木 一郎さん</cite>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Testimonials />
 
         <section id="contact">
           <div className="section-container">
