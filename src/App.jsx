@@ -4,6 +4,8 @@ import Hero from './components/Hero/Hero';
 import Features from './components/Features/Features';
 import Testimonials from './components/Testimonials/Testimonials';
 import Contact from './components/Contact/Contact';
+import Footer from './components/Footer/Footer';
+
 function App() {
   return (
     <div className="App">
@@ -19,11 +21,7 @@ function App() {
         <Contact />
       </main>
 
-      <footer>
-        <div className="section-container">
-          &copy; 2023 My Stylish LP. All rights reserved.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
