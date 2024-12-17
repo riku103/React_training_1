@@ -57,7 +57,6 @@ h2 {
   margin-bottom: 2rem;
 }
 
-.feature-container,
 .testimonial-container {
   display: flex;
   justify-content: space-between;
@@ -65,7 +64,6 @@ h2 {
   margin-top: 3rem;
 }
 
-.feature,
 .testimonial {
   flex-basis: calc(33.33% - 2rem);
   margin-bottom: 2rem;
@@ -76,16 +74,9 @@ h2 {
   transition: all 0.3s ease;
 }
 
-.feature:hover,
 .testimonial:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.feature i {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
 }
 
 .testimonial p {
