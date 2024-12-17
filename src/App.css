@@ -29,13 +29,6 @@ section {
   box-sizing: border-box;
 }
 
-.section-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 5%;
-  box-sizing: border-box;
-}
-
 h1,
 h2 {
   margin-bottom: 1rem;
@@ -62,24 +55,6 @@ h2 {
 #hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-}
-
-.cta-button {
-  display: inline-block;
-  background-color: #fff;
-  color: var(--primary-color);
-  padding: 0.8rem 2rem;
-  text-decoration: none;
-  border-radius: 50px;
-  font-weight: 700;
-  transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-  background-color: var(--primary-color);
-  color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .feature-container,
