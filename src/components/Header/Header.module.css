@@ -47,21 +47,13 @@ nav ul li a:hover {
   cursor: pointer;
 }
 
-.navLinks {
-  /* 初期状態では非表示 */
-  display: none;
-}
-
-.active {
-  display: flex;
-}
-
 @media (max-width: 768px) {
   .hamburger {
     display: block;
   }
 
   nav ul {
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 60px;
