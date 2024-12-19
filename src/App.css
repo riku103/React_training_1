@@ -85,15 +85,6 @@ button:hover {
   background-color: var(--secondary-color);
 }
 
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 2rem 0;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-}
-
 @media (max-width: 768px) {
   .hamburger {
     display: block;
