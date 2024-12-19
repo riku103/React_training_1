@@ -1,3 +1,5 @@
+import styles from './Hero.module.css';
+
 const Hero = ({
   title = '新しい体験をあなたに',
   subtitle = '革新的な製品で、あなたの日常をより豊かに、より便利に。',
@@ -5,11 +7,11 @@ const Hero = ({
   ctaLink = '#contact',
 }) => {
   return (
-    <section id="hero">
-      <div className="section-container">
+    <section id={styles.hero}>
+      <div className={styles.sectionContainer}>
         <h1>{title}</h1>
         <p>{subtitle}</p>
-        <a href={ctaLink} className="cta-button">{ctaText}</a>
+        <a href={ctaLink} className={styles.ctaButton}>{ctaText}</a>
       </div>
     </section>
   );
