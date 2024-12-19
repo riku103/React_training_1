@@ -1,7 +1,9 @@
+import styles from "./Contact.module.css";
+
 const Contact = () => {
   return (
     <section id="contact">
-      <div className="section-container">
+      <div className={styles.sectionContainer}>
         <h2>お問い合わせ</h2>
         <form>
           <input type="text" placeholder="お名前" required />
