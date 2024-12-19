@@ -36,3 +36,9 @@
   font-weight: 700;
   color: var(--primary-color);
 }
+
+@media (max-width: 768px) {
+  .testimonial {
+    flex-basis: 100%;
+  }
+}

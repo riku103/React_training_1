@@ -61,35 +61,3 @@ button {
 button:hover {
   background-color: var(--secondary-color);
 }
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  nav ul {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  nav ul.active {
-    display: flex;
-  }
-
-  nav ul li {
-    margin: 0;
-    text-align: center;
-    padding: 1rem;
-  }
-
-  .feature,
-  .testimonial {
-    flex-basis: 100%;
-  }
-}
