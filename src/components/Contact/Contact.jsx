@@ -2,7 +2,7 @@ import styles from "./Contact.module.css";
 
 const Contact = () => {
   return (
-    <section id="contact">
+    <section id={styles.contact}>
       <div className={styles.sectionContainer}>
         <h2>お問い合わせ</h2>
         <form>
