@@ -7,7 +7,7 @@ const Hero = ({
   ctaLink = '#contact',
 }) => {
   return (
-    <section id="hero">
+    <section id={styles.hero}>
       <div className={styles.sectionContainer}>
         <h1>{title}</h1>
         <p>{subtitle}</p>

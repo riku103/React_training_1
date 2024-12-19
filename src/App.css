@@ -34,29 +34,6 @@ h2 {
   margin-bottom: 1rem;
 }
 
-#hero {
-  background: linear-gradient(
-    135deg,
-    var(--primary-color),
-    var(--secondary-color)
-  );
-  color: #fff;
-  text-align: center;
-  padding: 8rem 0;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-}
-
-#hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-}
-
-#hero p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-
 form {
   display: flex;
   flex-direction: column;
