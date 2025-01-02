@@ -2,12 +2,13 @@ import styles from "./Contact.module.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 const Contact = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const onSubmit = (data) => {
     setIsSubmitted(true);
+    reset();
   };
 
   return (
