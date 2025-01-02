@@ -14,7 +14,7 @@ const Header = () => {
         <div className={styles.logo}>My Stylish LP</div>
         <nav>
           <div className={styles.hamburger} onClick={toggleMenu}>
-            ☰
+            {isOpen ? "✕" : "☰"}
           </div>
           <ul className={isOpen ? styles.active : ""}>
             <li>
