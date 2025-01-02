@@ -31,8 +31,20 @@ const Contact = () => {
             />
             {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
           </div>
-          {/* <input type="tel" placeholder="電話番号" required /> */}
-          {/* <textarea placeholder="メッセージ" rows="5" required></textarea> */}
+          <div className={styles.inputContainer}>
+            <input
+              {...register("tel", {
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: "電話番号は数字のみで入力してください。",
+                },
+              })}
+              type="tel"
+              placeholder="電話番号"
+            />
+            {errors.tel && <p style={{ color: "red" }}>{errors.tel.message}</p>}
+          </div>
+          <textarea placeholder="メッセージ" rows="5"></textarea>
           <button type="submit">送信する</button>
         </form>
       </div>
