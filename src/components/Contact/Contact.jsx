@@ -8,7 +8,8 @@ const Contact = () => {
         <form>
           <input type="text" placeholder="お名前" required />
           <input type="email" placeholder="メールアドレス" required />
-          <textarea placeholder="メッセージ" required></textarea>
+          <input type="tel" placeholder="電話番号" required />
+          <textarea placeholder="メッセージ" rows="5" required></textarea>
           <button type="submit">送信する</button>
         </form>
       </div>
