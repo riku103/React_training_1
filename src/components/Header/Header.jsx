@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const handleHamburgerClick = () => {
-    const navLinks = document.querySelector(`.${styles.navLinks}`);
-    navLinks.classList.toggle(styles.active);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -12,10 +13,10 @@ const Header = () => {
       <div className={styles.headerContainer}>
         <div className={styles.logo}>My Stylish LP</div>
         <nav>
-          <div className={styles.hamburger} onClick={handleHamburgerClick}>
+          <div className={styles.hamburger} onClick={toggleMenu}>
             ☰
           </div>
-          <ul className={`${styles.navLinks}`}>
+          <ul className={isOpen ? styles.active : ""}>
             <li>
               <a href="#hero">ホーム</a>
             </li>
