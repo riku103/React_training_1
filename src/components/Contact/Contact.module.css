@@ -10,6 +10,8 @@
 }
 
 .inputContainer {
+  margin-bottom: 20px;
+
   & input {
     width: 100%;
   }

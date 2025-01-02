@@ -44,8 +44,8 @@ const Contact = () => {
             />
             {errors.tel && <p style={{ color: "red" }}>{errors.tel.message}</p>}
           </div>
-          <textarea placeholder="メッセージ" rows="5"></textarea>
-          <button type="submit">送信する</button>
+          <textarea placeholder="メッセージ" rows="6"></textarea>
+          <button type="submit">登録する</button>
         </form>
       </div>
     </section>
