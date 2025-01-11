@@ -7,6 +7,21 @@ import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 
 function App() {
+  const features = [
+    {
+      title: "最高品質",
+      description: "厳選された素材と職人技が生み出す、比類なき品質をお届けします。"
+    },
+    {
+      title: "使いやすさ",
+      description: "直感的なデザインで、誰もが簡単に使いこなせる製品です。"
+    },
+    {
+      title: "24時間サポート",
+      description: "お客様のニーズに合わせて、いつでもどこでもサポートいたします。"
+    },
+  ]
+
   return (
     <div className="App">
       <Header />
@@ -14,7 +29,7 @@ function App() {
       <main>
         <Hero />
 
-        <Features />
+        <Features title="特徴" features={features} />
 
         <Testimonials />
 

@@ -6,7 +6,7 @@ const getIconName = (index) => {
 };
 
 const Features = ({
-  title = '特徴',
+  title = '',
   features = [
     {
       title: "最高品質",
