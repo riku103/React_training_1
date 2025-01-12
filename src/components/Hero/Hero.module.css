@@ -36,6 +36,11 @@
   margin-left: calc(50% - 50vw);
 }
 
+:global(.App.dark) #hero {
+  background: none;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
 #hero h1 {
   font-size: 3rem;
   margin-bottom: 1.5rem;
