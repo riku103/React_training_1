@@ -1,5 +1,7 @@
 #contact {
-  background-color: #fff;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
 }
 
 .sectionContainer {
