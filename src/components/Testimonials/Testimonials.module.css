@@ -1,3 +1,9 @@
+#testimonials {
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
 .sectionContainer {
   max-width: 1200px;
   margin: 0 auto;
@@ -41,7 +47,7 @@
   opacity: 0.9;
 }
 
-.App.dark .testimonial {
+:global(.App.dark) .testimonial {
   border-color: rgba(255, 255, 255, 0.1);
 }
 

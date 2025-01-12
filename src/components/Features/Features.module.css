@@ -1,3 +1,9 @@
+#features {
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
 .sectionContainer {
   max-width: 1200px;
   margin: 0 auto;
@@ -44,8 +50,8 @@
   color: var(--text-color);
 }
 
-.App.dark .feature {
-  border-color: rgba(255, 255, 255, 0.1);
+:global(.App.dark) .feature {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 768px) {

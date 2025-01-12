@@ -23,7 +23,7 @@ const Features = ({
   ]
 }) => {
   return (
-    <section id="features">
+    <section id={styles.features}>
       <div className={styles.sectionContainer}>
         <h2>{title}</h2>
         <div className={styles.featureContainer}>
