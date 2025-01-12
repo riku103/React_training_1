@@ -25,9 +25,13 @@ function App() {
 
   const [darkMode, setDarkMode] = useState(false);
 
+  const changeDarkMode = () => {
+    setDarkMode(!darkMode);
+  }
+
   return (
     <div className={`App ${darkMode ? 'dark' : 'light'}`}>
-      <Header />
+      <Header changeDarkMode={changeDarkMode} />
 
       <main>
         <Hero />

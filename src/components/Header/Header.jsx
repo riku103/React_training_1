@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ changeDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -46,7 +46,7 @@ const Header = () => {
             </li>
           </ul>
           <div className={styles.toggleButton}>
-            <input id="toggle" type="checkbox" />
+            <input id="toggle" type="checkbox" onChange={changeDarkMode} />
             <label htmlFor="toggle" />
           </div>
           </div>
