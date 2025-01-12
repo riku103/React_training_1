@@ -1,9 +1,10 @@
 .header {
-  background-color: #fff;
+  background-color: var(--bg-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
   z-index: 1000;
+  transition: background-color 0.3s ease;
 }
 
 .headerContainer {
@@ -18,7 +19,8 @@
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 nav ul {
@@ -59,8 +61,9 @@ nav ul li a:hover {
     top: 60px;
     left: 0;
     width: 100%;
-    background-color: #fff;
+    background-color: var(--bg-color);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
   }
 
   nav ul.active {
@@ -72,4 +75,58 @@ nav ul li a:hover {
     text-align: center;
     padding: 1rem;
   }
+
+  .toggleButton {
+    margin-left: 1rem !important;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+}
+
+.toggleButton {
+  position: relative;
+  margin-left: 2rem;
+}
+
+.toggleButton input {
+  display: none;
+}
+
+.toggleButton label {
+  position: relative;
+  display: block;
+  width: 48px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggleButton label::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggleButton input:checked + label {
+  background-color: #1a4b8c;
+}
+
+.toggleButton input:checked + label::after {
+  transform: translateX(24px);
 }

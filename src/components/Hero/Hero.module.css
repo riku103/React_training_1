@@ -7,7 +7,7 @@
 
 .ctaButton {
   display: inline-block;
-  background-color: #fff;
+  background-color: var(--bg-color);
   color: var(--primary-color);
   padding: 0.8rem 2rem;
   text-decoration: none;
@@ -18,7 +18,7 @@
 
 .ctaButton:hover {
   background-color: var(--primary-color);
-  color: #fff;
+  color: var(--bg-color);
   transform: translateY(-3px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -29,13 +29,18 @@
     var(--primary-color),
     var(--secondary-color)
   );
-  color: #fff;
+  color: var(--bg-color);
   text-align: center;
   padding: 8rem 0;
   width: 100vw;
   margin-left: calc(50% - 50vw);
 }
 
+:global(.App.dark) #hero {
+  background: none;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
 #hero h1 {
   font-size: 3rem;
   margin-bottom: 1.5rem;

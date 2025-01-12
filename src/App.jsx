@@ -5,6 +5,7 @@ import Features from './components/Features/Features';
 import Testimonials from './components/Testimonials/Testimonials';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
+import { useState } from 'react';
 
 function App() {
   const features = [
@@ -22,9 +23,15 @@ function App() {
     },
   ]
 
+  const [darkMode, setDarkMode] = useState(false);
+
+  const changeDarkMode = () => {
+    setDarkMode(!darkMode);
+  }
+
   return (
-    <div className="App">
-      <Header />
+    <div className={`App ${darkMode ? 'dark' : 'light'}`}>
+      <Header changeDarkMode={changeDarkMode} />
 
       <main>
         <Hero />

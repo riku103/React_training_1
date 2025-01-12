@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ changeDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -26,10 +26,11 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.headerContainer}>
         <div className={styles.logo}>My Stylish LP</div>
-        <nav>
+        <nav className={styles.nav}>
           <div className={styles.hamburger} onClick={toggleMenu}>
             {isOpen ? "✕" : "☰"}
           </div>
+          <div className={styles.navContainer}>
           <ul className={isOpen ? styles.active : ""}>
             <li>
               <a href="#hero">ホーム</a>
@@ -44,6 +45,11 @@ const Header = () => {
               <a href="#contact">お問い合わせ</a>
             </li>
           </ul>
+          <div className={styles.toggleButton}>
+            <input id="toggle" type="checkbox" onChange={changeDarkMode} />
+            <label htmlFor="toggle" />
+          </div>
+          </div>
         </nav>
       </div>
     </header>
