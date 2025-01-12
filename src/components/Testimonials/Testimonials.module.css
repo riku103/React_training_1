@@ -15,11 +15,13 @@
 .testimonial {
   flex-basis: calc(33.33% - 2rem);
   margin-bottom: 2rem;
-  background-color: #fff;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .testimonial:hover {
@@ -30,11 +32,17 @@
 .testimonial p {
   font-style: italic;
   margin-bottom: 1rem;
+  color: var(--text-color);
 }
 
 .testimonial cite {
   font-weight: 700;
   color: var(--primary-color);
+  opacity: 0.9;
+}
+
+.App.dark .testimonial {
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {
