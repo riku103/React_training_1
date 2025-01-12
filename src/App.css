@@ -61,3 +61,8 @@ button {
 button:hover {
   background-color: var(--secondary-color);
 }
+
+.App.dark {
+  --text-color: #fff;
+  --bg-color: #121212;
+}
