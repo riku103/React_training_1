@@ -2,7 +2,9 @@ import styles from "./Contact.module.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 const Contact = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    mode: "onChange",
+  });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
