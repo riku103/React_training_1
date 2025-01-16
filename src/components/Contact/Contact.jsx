@@ -2,7 +2,7 @@ import styles from "./Contact.module.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 const Contact = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
     mode: "onChange",
   });
 
@@ -55,7 +55,7 @@ const Contact = () => {
           {errors.tel && <p style={{ color: "red" }}>{errors.tel.message}</p>}
         </div>
         <textarea placeholder="メッセージ" rows="6"></textarea>
-          <button type="submit">登録する</button>
+          <button type="submit" disabled={isSubmitting}>登録する</button>
         </form>
       </div>
     </section>
