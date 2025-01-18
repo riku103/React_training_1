@@ -5,7 +5,7 @@ const Contact = () => {
   const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset } = useForm({
     mode: "onChange",
     defaultValues: {
-      contacts: [{ name: "", email: "", tel: "" }]
+      contacts: [{ name: "", email: "", tel: "", message: "" }]
     }
   });
 
@@ -71,15 +71,21 @@ const Contact = () => {
                   <p style={{ color: "red" }}>{errors.contacts[index].tel.message}</p>
                 }
               </div>
+              <div className={styles.inputContainer}>
+                <textarea
+                  {...register(`contacts.${index}.message`)}
+                  placeholder="メッセージ"
+                  rows="6"
+                />
+              </div>
               {fields.length > 1 && (
                 <button type="button" onClick={() => remove(index)}>削除</button>
               )}
             </div>
           ))}
-          <button type="button" onClick={() => append({ name: "", email: "", tel: "" })}>
+          <button type="button" onClick={() => append({ name: "", email: "", tel: "", message: "" })}>
             連絡先を追加
           </button>
-          <textarea placeholder="メッセージ" rows="6"></textarea>
           <button type="submit" disabled={isSubmitting}>登録する</button>
         </form>
       </div>
