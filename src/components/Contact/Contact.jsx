@@ -5,13 +5,21 @@ const Contact = () => {
   const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset } = useForm({
     mode: "onChange",
     defaultValues: {
-      contacts: [{ name: "", email: "", tel: "", message: "" }]
+      name: "",
+      emails: [{ email: "" }],
+      tels: [{ tel: "" }],
+      message: ""
     }
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields: emailFields, append: appendEmail, remove: removeEmail } = useFieldArray({
     control,
-    name: "contacts"
+    name: "emails"
+  });
+
+  const { fields: telFields, append: appendTel, remove: removeTel } = useFieldArray({
+    control,
+    name: "tels"
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -29,63 +37,70 @@ const Contact = () => {
           <div className={styles.successMessage}>お問い合わせが送信されました。</div>
         )}
         <form onSubmit={handleSubmit(onSubmit)}>
-          {fields.map((field, index) => (
-            <div key={field.id}>
-              <div className={styles.inputContainer}>
-                <input
-                  {...register(`contacts.${index}.name`, { required: "お名前を入力してください。" })}
-                  placeholder="お名前"
-                />
-                {errors.contacts?.[index]?.name &&
-                  <p style={{ color: "red" }}>{errors.contacts[index].name.message}</p>
-                }
-              </div>
-              <div className={styles.inputContainer}>
-                <input
-                  {...register(`contacts.${index}.email`, {
-                    required: "メールアドレスを入力してください。",
-                    pattern: {
-                      value: /^\S+@\S+\.\S+$/,
-                      message: "有効なメールアドレスを入力してください。",
-                    },
-                  })}
-                  type="email"
-                  placeholder="メールアドレス"
-                />
-                {errors.contacts?.[index]?.email &&
-                  <p style={{ color: "red" }}>{errors.contacts[index].email.message}</p>
-                }
-              </div>
-              <div className={styles.inputContainer}>
-                <input
-                  {...register(`contacts.${index}.tel`, {
-                    pattern: {
-                      value: /^[0-9]+$/,
-                      message: "電話番号は数字のみで入力してください。",
-                    },
-                  })}
-                  type="tel"
-                  placeholder="電話番号"
-                />
-                {errors.contacts?.[index]?.tel &&
-                  <p style={{ color: "red" }}>{errors.contacts[index].tel.message}</p>
-                }
-              </div>
-              <div className={styles.inputContainer}>
-                <textarea
-                  {...register(`contacts.${index}.message`)}
-                  placeholder="メッセージ"
-                  rows="6"
-                />
-              </div>
-              {fields.length > 1 && (
-                <button type="button" onClick={() => remove(index)}>削除</button>
+          <div className={styles.inputContainer}>
+            <input
+              {...register("name", { required: "お名前を入力してください。" })}
+              placeholder="お名前"
+            />
+            {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
+          </div>
+
+          {emailFields.map((field, index) => (
+            <div key={field.id} className={styles.inputContainer}>
+              <input
+                {...register(`emails.${index}.email`, {
+                  required: "メールアドレスを入力してください。",
+                  pattern: {
+                    value: /^\S+@\S+\.\S+$/,
+                    message: "有効なメールアドレスを入力してください。",
+                  },
+                })}
+                type="email"
+                placeholder="メールアドレス"
+              />
+              {errors.emails?.[index]?.email && (
+                <p style={{ color: "red" }}>{errors.emails[index].email.message}</p>
+              )}
+              {emailFields.length > 1 && (
+                <button type="button" onClick={() => removeEmail(index)}>メールアドレスを削除</button>
               )}
             </div>
           ))}
-          <button type="button" onClick={() => append({ name: "", email: "", tel: "", message: "" })}>
-            連絡先を追加
+          <button type="button" onClick={() => appendEmail({ email: "" })}>
+            メールアドレスを追加
           </button>
+
+          {telFields.map((field, index) => (
+            <div key={field.id} className={styles.inputContainer}>
+              <input
+                {...register(`tels.${index}.tel`, {
+                  pattern: {
+                    value: /^[0-9]+$/,
+                    message: "電話番号は数字のみで入力してください。",
+                  },
+                })}
+                type="tel"
+                placeholder="電話番号"
+              />
+              {errors.tels?.[index]?.tel && (
+                <p style={{ color: "red" }}>{errors.tels[index].tel.message}</p>
+              )}
+              {telFields.length > 1 && (
+                <button type="button" onClick={() => removeTel(index)}>電話番号を削除</button>
+              )}
+            </div>
+          ))}
+          <button type="button" onClick={() => appendTel({ tel: "" })}>
+            電話番号を追加
+          </button>
+
+          <div className={styles.inputContainer}>
+            <textarea
+              {...register("message")}
+              placeholder="メッセージ"
+              rows="6"
+            />
+          </div>
           <button type="submit" disabled={isSubmitting}>登録する</button>
         </form>
       </div>
