@@ -1,6 +1,6 @@
 import styles from './Features.module.css';
 
-const getIconName = (index) => {
+const getIconName = (index: number) => {
   const icons = ['gem', 'mobile-alt', 'headset'];
   return icons[index];
 };
