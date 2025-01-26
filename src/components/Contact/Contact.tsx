@@ -24,7 +24,7 @@ const Contact = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     setIsSubmitted(true);
     reset();
   };
@@ -98,7 +98,7 @@ const Contact = () => {
             <textarea
               {...register("message")}
               placeholder="メッセージ"
-              rows="6"
+              rows={6}
             />
           </div>
           <button type="submit" disabled={isSubmitting}>登録する</button>

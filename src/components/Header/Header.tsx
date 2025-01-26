@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 
-const Header = ({ changeDarkMode }) => {
+const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
