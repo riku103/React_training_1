@@ -1,4 +1,5 @@
 import styles from './Features.module.css';
+import { FeaturesProps } from '../../types/feature';
 
 const getIconName = (index: number) => {
   const icons = ['gem', 'mobile-alt', 'headset'];
@@ -21,7 +22,7 @@ const Features = ({
       description: "お客様のニーズに合わせて、いつでもどこでもサポートいたします。"
     },
   ]
-}) => {
+}: FeaturesProps) => {
   return (
     <section id={styles.features}>
       <div className={styles.sectionContainer}>
