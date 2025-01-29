@@ -45,6 +45,9 @@ const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
             <li>
               <Link to="#contact">お問い合わせ</Link>
             </li>
+            <li>
+              <Link to="/about">私たちについて</Link>
+            </li>
           </ul>
           <div className={styles.toggleButton}>
             <input id="toggle" type="checkbox" onChange={changeDarkMode} />
