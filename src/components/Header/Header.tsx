@@ -37,6 +37,9 @@ const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
               <Link to="#hero">ホーム</Link>
             </li>
             <li>
+              <Link to="/about">私たちについて</Link>
+            </li>
+            <li>
               <Link to="#features">特徴</Link>
             </li>
             <li>
@@ -44,9 +47,6 @@ const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
             </li>
             <li>
               <Link to="#contact">お問い合わせ</Link>
-            </li>
-            <li>
-              <Link to="/about">私たちについて</Link>
             </li>
           </ul>
           <div className={styles.toggleButton}>

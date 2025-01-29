@@ -19,7 +19,7 @@
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--primary-color);
   transition: color 0.3s ease;
 }
 
