@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
@@ -33,16 +34,16 @@ const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
           <div className={styles.navContainer}>
           <ul className={isOpen ? styles.active : ""}>
             <li>
-              <a href="#hero">ホーム</a>
+              <Link to="#hero">ホーム</Link>
             </li>
             <li>
-              <a href="#features">特徴</a>
+              <Link to="#features">特徴</Link>
             </li>
             <li>
-              <a href="#testimonials">お客様の声</a>
+              <Link to="#testimonials">お客様の声</Link>
             </li>
             <li>
-              <a href="#contact">お問い合わせ</a>
+              <Link to="#contact">お問い合わせ</Link>
             </li>
           </ul>
           <div className={styles.toggleButton}>
