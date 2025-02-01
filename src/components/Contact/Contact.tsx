@@ -59,7 +59,7 @@ const Contact = () => {
                 placeholder="メールアドレス"
               />
               {errors.emails?.[index]?.email && (
-                <p style={{ color: "red" }}>{errors.emails[index].email.message}</p>
+                <p style={{ color: "red" }}>{errors.emails?.[index]?.email?.message}</p>
               )}
               {emailFields.length > 1 && (
                 <button type="button" onClick={() => removeEmail(index)}>メールアドレスを削除</button>
@@ -83,7 +83,7 @@ const Contact = () => {
                 placeholder="電話番号"
               />
               {errors.tels?.[index]?.tel && (
-                <p style={{ color: "red" }}>{errors.tels[index].tel.message}</p>
+                <p style={{ color: "red" }}>{errors.tels?.[index]?.tel?.message}</p>
               )}
               {telFields.length > 1 && (
                 <button type="button" onClick={() => removeTel(index)}>電話番号を削除</button>
