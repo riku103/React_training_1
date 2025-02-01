@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
@@ -62,4 +62,4 @@ const Header = ({ changeDarkMode }: { changeDarkMode?: () => void }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
