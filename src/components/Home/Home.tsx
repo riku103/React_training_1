@@ -28,6 +28,24 @@ function Home() {
     },
   ]
 
+  const testimonials = [
+    {
+      id: 1,
+      text: "この製品は私の生活を劇的に変えました。毎日が楽しくなります。",
+      author: "田中 花子さん"
+    },
+    {
+      id: 2,
+      text: "使いやすさが抜群です。他の製品とは比べものになりません。",
+      author: "佐藤 太郎さん"
+    },
+    {
+      id: 3,
+      text: "サポートの質が素晴らしい。困ったときにいつでも頼れるのが心強いです。",
+      author: "鈴木 一郎さん"
+    }
+  ]
+
   const changeDarkMode = () => {
     setDarkMode(!darkMode);
   }
@@ -41,7 +59,7 @@ function Home() {
 
         <Features title="特徴" features={features} />
 
-        <Testimonials />
+        <Testimonials title="お客様の声" testimonials={testimonials} />
 
         <Contact />
       </main>
