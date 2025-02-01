@@ -12,14 +12,17 @@ function Home() {
 
   const features = [
     {
+      id: 1,
       title: "最高品質",
       description: "厳選された素材と職人技が生み出す、比類なき品質をお届けします。"
     },
     {
+      id: 2,
       title: "使いやすさ",
       description: "直感的なデザインで、誰もが簡単に使いこなせる製品です。"
     },
     {
+      id: 3,
       title: "24時間サポート",
       description: "お客様のニーズに合わせて、いつでもどこでもサポートいたします。"
     },
