@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
-const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
+const Header = ({ changeDarkMode }: { changeDarkMode?: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -34,7 +34,7 @@ const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
           <div className={styles.navContainer}>
           <ul className={isOpen ? styles.active : ""}>
             <li>
-              <Link to="#hero">ホーム</Link>
+              <Link to="/">ホーム</Link>
             </li>
             <li>
               <Link to="/about">私たちについて</Link>
@@ -49,10 +49,12 @@ const Header = ({ changeDarkMode }: { changeDarkMode: () => void }) => {
               <Link to="#contact">お問い合わせ</Link>
             </li>
           </ul>
-          <div className={styles.toggleButton}>
-            <input id="toggle" type="checkbox" onChange={changeDarkMode} />
-            <label htmlFor="toggle" />
-          </div>
+          {changeDarkMode && (
+            <div className={styles.toggleButton}>
+              <input id="toggle" type="checkbox" onChange={changeDarkMode} />
+              <label htmlFor="toggle" />
+            </div>
+          )}
           </div>
         </nav>
       </div>
