@@ -7,7 +7,7 @@ const Testimonials = ({
   testimonials = []
 }: TestimonialsProps) => {
   return (
-    <section id={styles.testimonials}>
+    <section id="testimonials" className={styles.testimonials}>
       <div className={styles.sectionContainer}>
         <h2>{title}</h2>
         <div className={styles.testimonialContainer}>
