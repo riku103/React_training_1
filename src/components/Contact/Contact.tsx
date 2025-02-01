@@ -30,7 +30,7 @@ const Contact = () => {
   };
 
   return (
-    <section id={styles.contact}>
+    <section id="contact" className={styles.contact}>
       <div className={styles.sectionContainer}>
         <h2>お問い合わせ</h2>
         {isSubmitted && (

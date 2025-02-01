@@ -7,7 +7,7 @@ const Features = ({
   features = []
 }: FeaturesProps) => {
   return (
-    <section id={styles.features}>
+    <section id="features" className={styles.features}>
       <div className={styles.sectionContainer}>
         <h2>{title}</h2>
         <div className={styles.featureContainer}>
