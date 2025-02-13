@@ -1,7 +1,7 @@
 import styles from "./Contact.module.css";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useState } from "react";
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
 const Contact = () => {
@@ -78,9 +78,14 @@ const Contact = () => {
               <PhoneInput
                 international
                 defaultCountry="JP"
-                {...register(`tels.${index}.tel`)}
+                {...register(`tels.${index}.tel`, {
+                  validate: (value) => {
+                    if (!value) return "電話番号を入力してください。";
+                    if (!isValidPhoneNumber(value)) return "有効な電話番号を入力してください。";
+                    return true;
+                  }
+                })}
                 onChange={(value) => {
-                  // PhoneInputの値を手動でフォームに設定
                   const event = {
                     target: {
                       name: `tels.${index}.tel`,
