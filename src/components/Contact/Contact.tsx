@@ -1,6 +1,9 @@
 import styles from "./Contact.module.css";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useState } from "react";
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+
 const Contact = () => {
   const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset } = useForm({
     mode: "onChange",
@@ -72,14 +75,20 @@ const Contact = () => {
 
           {telFields.map((field, index) => (
             <div key={field.id} className={styles.inputContainer}>
-              <input
-                {...register(`tels.${index}.tel`, {
-                  pattern: {
-                    value: /^[0-9]+$/,
-                    message: "電話番号は数字のみで入力してください。",
-                  },
-                })}
-                type="tel"
+              <PhoneInput
+                international
+                defaultCountry="JP"
+                {...register(`tels.${index}.tel`)}
+                onChange={(value) => {
+                  // PhoneInputの値を手動でフォームに設定
+                  const event = {
+                    target: {
+                      name: `tels.${index}.tel`,
+                      value: value || ''
+                    }
+                  };
+                  register(`tels.${index}.tel`).onChange(event);
+                }}
                 placeholder="電話番号"
               />
               {errors.tels?.[index]?.tel && (
