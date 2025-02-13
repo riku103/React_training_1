@@ -1,11 +1,11 @@
 import styles from "./Contact.module.css";
 import { useForm, useFieldArray } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
 const Contact = () => {
-  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset } = useForm({
+  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, setValue, watch } = useForm({
     mode: "onChange",
     defaultValues: {
       name: "",
@@ -28,6 +28,30 @@ const Contact = () => {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const postalCode = watch("postalCode");
+
+  const fetchAddress = useCallback(async (postalCode: string) => {
+    if (postalCode.length === 7) {
+      try {
+        const response = await fetch(
+          `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`
+        );
+        const data = await response.json();
+        if (data.results) {
+          const address = `${data.results[0].address1}${data.results[0].address2}${data.results[0].address3}`;
+          setValue("address", address);
+        }
+      } catch (error) {
+        console.error("郵便番号検索でエラーが発生しました:", error);
+      }
+    }
+  }, [setValue]);
+
+  // 郵便番号が変更されたときに住所を取得
+  useEffect(() => {
+    fetchAddress(postalCode);
+  }, [postalCode, fetchAddress]);
 
   const onSubmit = () => {
     setIsSubmitted(true);
@@ -117,6 +141,10 @@ const Contact = () => {
                 pattern: {
                   value: /^\d{7}$/,
                   message: "郵便番号は7桁の数字で入力してください。",
+                },
+                onChange: (e) => {
+                  const value = e.target.value.replace(/[^\d]/g, "");
+                  e.target.value = value;
                 }
               })}
               placeholder="郵便番号（ハイフンなし）"
