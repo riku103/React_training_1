@@ -5,12 +5,14 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
 const Contact = () => {
-  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, watch } = useForm({
+  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset } = useForm({
     mode: "onChange",
     defaultValues: {
       name: "",
       emails: [{ email: "", confirmEmail: "" }],
       tels: [{ tel: "" }],
+      postalCode: "",
+      address: "",
       message: ""
     }
   });
@@ -64,22 +66,6 @@ const Contact = () => {
               {errors.emails?.[index]?.email && (
                 <p style={{ color: "red" }}>{errors.emails?.[index]?.email?.message}</p>
               )}
-
-              <input
-                {...register(`emails.${index}.confirmEmail`, {
-                  required: "確認用メールアドレスを入力してください。",
-                  validate: (value) => {
-                    const emails = watch(`emails.${index}.email`);
-                    return value === emails || "メールアドレスが一致しません。";
-                  }
-                })}
-                type="email"
-                placeholder="メールアドレス（確認用）"
-              />
-              {errors.emails?.[index]?.confirmEmail && (
-                <p style={{ color: "red" }}>{errors.emails?.[index]?.confirmEmail?.message}</p>
-              )}
-
               {emailFields.length > 1 && (
                 <button type="button" onClick={() => removeEmail(index)}>メールアドレスを削除</button>
               )}
@@ -123,6 +109,29 @@ const Contact = () => {
           <button type="button" onClick={() => appendTel({ tel: "" })}>
             電話番号を追加
           </button>
+
+          <div className={styles.inputContainer}>
+            <input
+              {...register("postalCode", {
+                required: "郵便番号を入力してください。",
+                pattern: {
+                  value: /^\d{7}$/,
+                  message: "郵便番号は7桁の数字で入力してください。",
+                }
+              })}
+              placeholder="郵便番号（ハイフンなし）"
+              style={{ width: "50%" }}
+            />
+            {errors.postalCode && <p style={{ color: "red" }}>{errors.postalCode.message}</p>}
+          </div>
+
+          <div className={styles.inputContainer}>
+            <input
+              {...register("address", { required: "住所を入力してください。" })}
+              placeholder="住所"
+            />
+            {errors.address && <p style={{ color: "red" }}>{errors.address.message}</p>}
+          </div>
 
           <div className={styles.inputContainer}>
             <textarea
