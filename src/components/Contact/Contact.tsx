@@ -5,11 +5,11 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
 const Contact = () => {
-  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset } = useForm({
+  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, watch } = useForm({
     mode: "onChange",
     defaultValues: {
       name: "",
-      emails: [{ email: "" }],
+      emails: [{ email: "", confirmEmail: "" }],
       tels: [{ tel: "" }],
       message: ""
     }
@@ -64,12 +64,28 @@ const Contact = () => {
               {errors.emails?.[index]?.email && (
                 <p style={{ color: "red" }}>{errors.emails?.[index]?.email?.message}</p>
               )}
+
+              <input
+                {...register(`emails.${index}.confirmEmail`, {
+                  required: "確認用メールアドレスを入力してください。",
+                  validate: (value) => {
+                    const emails = watch(`emails.${index}.email`);
+                    return value === emails || "メールアドレスが一致しません。";
+                  }
+                })}
+                type="email"
+                placeholder="メールアドレス（確認用）"
+              />
+              {errors.emails?.[index]?.confirmEmail && (
+                <p style={{ color: "red" }}>{errors.emails?.[index]?.confirmEmail?.message}</p>
+              )}
+
               {emailFields.length > 1 && (
                 <button type="button" onClick={() => removeEmail(index)}>メールアドレスを削除</button>
               )}
             </div>
           ))}
-          <button type="button" onClick={() => appendEmail({ email: "" })}>
+          <button type="button" onClick={() => appendEmail({ email: "", confirmEmail: "" })}>
             メールアドレスを追加
           </button>
 
