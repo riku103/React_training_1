@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { PostalCode } from "../../types/postalCode";
+
 const Contact = () => {
   const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, setValue, watch } = useForm({
     mode: "onChange",
@@ -31,14 +32,23 @@ const Contact = () => {
 
   const postalCode = watch("postalCode");
 
+  const isPostalCodeResponse = (data: any): data is PostalCode => {
+    return (
+      typeof data === 'object' &&
+      data !== null &&
+      'results' in data &&
+      (data.results === null || Array.isArray(data.results))
+    );
+  };
+
   const fetchAddress = useCallback(async (postalCode: string) => {
     if (postalCode.length === 7) {
       try {
         const response = await fetch(
           `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`
         );
-        const data: PostalCode = await response.json();
-        if (data.results) {
+        const data = await response.json();
+        if (isPostalCodeResponse(data) && data.results) {
           const address = `${data.results[0].address1}${data.results[0].address2}${data.results[0].address3}`;
           setValue("address", address);
         }
