@@ -3,7 +3,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { useState, useEffect, useCallback } from "react";
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-
+import { PostalCode } from "../../types/postalCode";
 const Contact = () => {
   const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, setValue, watch } = useForm({
     mode: "onChange",
@@ -37,7 +37,7 @@ const Contact = () => {
         const response = await fetch(
           `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`
         );
-        const data = await response.json();
+        const data: PostalCode = await response.json();
         if (data.results) {
           const address = `${data.results[0].address1}${data.results[0].address2}${data.results[0].address3}`;
           setValue("address", address);
