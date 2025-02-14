@@ -1,13 +1,19 @@
 import styles from "./Contact.module.css";
 import { useForm, useFieldArray } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { PostalCode } from "../../types/postalCode";
+
 const Contact = () => {
-  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset } = useForm({
+  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, setValue, watch } = useForm({
     mode: "onChange",
     defaultValues: {
       name: "",
-      emails: [{ email: "" }],
+      emails: [{ email: "", confirmEmail: "" }],
       tels: [{ tel: "" }],
+      postalCode: "",
+      address: "",
       message: ""
     }
   });
@@ -23,6 +29,39 @@ const Contact = () => {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const postalCode = watch("postalCode");
+
+  const isPostalCodeResponse = (data: any): data is PostalCode => {
+    return (
+      typeof data === 'object' &&
+      data !== null &&
+      'results' in data &&
+      (data.results === null || Array.isArray(data.results))
+    );
+  };
+
+  const fetchAddress = useCallback(async (postalCode: string) => {
+    if (postalCode.length === 7) {
+      try {
+        const response = await fetch(
+          `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`
+        );
+        const data = await response.json();
+        if (isPostalCodeResponse(data) && data.results) {
+          const address = `${data.results[0].address1}${data.results[0].address2}${data.results[0].address3}`;
+          setValue("address", address);
+        }
+      } catch (error) {
+        console.error("郵便番号検索でエラーが発生しました:", error);
+      }
+    }
+  }, [setValue]);
+
+  // 郵便番号が変更されたときに住所を取得
+  useEffect(() => {
+    fetchAddress(postalCode);
+  }, [postalCode, fetchAddress]);
 
   const onSubmit = () => {
     setIsSubmitted(true);
@@ -66,20 +105,31 @@ const Contact = () => {
               )}
             </div>
           ))}
-          <button type="button" onClick={() => appendEmail({ email: "" })}>
+          <button type="button" onClick={() => appendEmail({ email: "", confirmEmail: "" })}>
             メールアドレスを追加
           </button>
 
           {telFields.map((field, index) => (
             <div key={field.id} className={styles.inputContainer}>
-              <input
+              <PhoneInput
+                international
+                defaultCountry="JP"
                 {...register(`tels.${index}.tel`, {
-                  pattern: {
-                    value: /^[0-9]+$/,
-                    message: "電話番号は数字のみで入力してください。",
-                  },
+                  validate: (value) => {
+                    if (!value) return "電話番号を入力してください。";
+                    if (!isValidPhoneNumber(value)) return "有効な電話番号を入力してください。";
+                    return true;
+                  }
                 })}
-                type="tel"
+                onChange={(value) => {
+                  const event = {
+                    target: {
+                      name: `tels.${index}.tel`,
+                      value: value || ''
+                    }
+                  };
+                  register(`tels.${index}.tel`).onChange(event);
+                }}
                 placeholder="電話番号"
               />
               {errors.tels?.[index]?.tel && (
@@ -93,6 +143,33 @@ const Contact = () => {
           <button type="button" onClick={() => appendTel({ tel: "" })}>
             電話番号を追加
           </button>
+
+          <div className={styles.inputContainer}>
+            <input
+              {...register("postalCode", {
+                required: "郵便番号を入力してください。",
+                pattern: {
+                  value: /^\d{7}$/,
+                  message: "郵便番号は7桁の数字で入力してください。",
+                },
+                onChange: (e) => {
+                  const value = e.target.value.replace(/[^\d]/g, "");
+                  e.target.value = value;
+                }
+              })}
+              placeholder="郵便番号（ハイフンなし）"
+              style={{ width: "50%" }}
+            />
+            {errors.postalCode && <p style={{ color: "red" }}>{errors.postalCode.message}</p>}
+          </div>
+
+          <div className={styles.inputContainer}>
+            <input
+              {...register("address", { required: "住所を入力してください。" })}
+              placeholder="住所"
+            />
+            {errors.address && <p style={{ color: "red" }}>{errors.address.message}</p>}
+          </div>
 
           <div className={styles.inputContainer}>
             <textarea
