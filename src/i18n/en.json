@@ -1,0 +1,44 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "features": "Features",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "A New Experience Awaits You",
+    "subtitle": "Enrich your daily life with our innovative products.",
+    "ctaButton": "Try Now"
+  },
+  "features": {
+    "title": "Features",
+    "items": {
+      "1": {
+        "title": "Premium Quality",
+        "description": "We deliver unparalleled quality through carefully selected materials and craftsmanship."
+      },
+      "2": {
+        "title": "User-Friendly",
+        "description": "Our products are designed with intuitive interfaces that anyone can use easily."
+      },
+      "3": {
+        "title": "24/7 Support",
+        "description": "We provide support anytime, anywhere, according to your needs."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "confirmEmail": "Confirm Email",
+      "phone": "Phone",
+      "postalCode": "Postal Code",
+      "address": "Address",
+      "message": "Message",
+      "submit": "Submit"
+    }
+  }
+}
