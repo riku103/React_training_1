@@ -42,7 +42,3 @@ export interface TranslationType {
 }
 
 export type TranslationKey = RecursiveKeyOf<TranslationType>;
-
-export type TranslationType = {
-  [key: string]: string | TranslationType;
-};
