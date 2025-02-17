@@ -2,13 +2,14 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import enTranslation from './en.json';
 import jaTranslation from './ja.json';
+import { TranslationType } from '../types/i18n';
 
-const resources = {
+const resources: { [key: string]: { translation: TranslationType } } = {
   en: {
-    translation: enTranslation
+    translation: enTranslation as TranslationType
   },
   ja: {
-    translation: jaTranslation
+    translation: jaTranslation as TranslationType
   }
 };
 
