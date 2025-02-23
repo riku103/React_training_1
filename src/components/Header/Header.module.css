@@ -133,3 +133,9 @@ nav ul li a:hover {
 .toggleButton input:checked + label::after {
   transform: translateX(24px);
 }
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

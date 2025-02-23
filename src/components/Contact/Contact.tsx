@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { PostalCode } from "../../types/postalCode";
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
   const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, setValue, watch } = useForm({
@@ -68,18 +69,20 @@ const Contact = () => {
     reset();
   };
 
+  const { t } = useTranslation();
+
   return (
     <section id="contact" className={styles.contact}>
       <div className={styles.sectionContainer}>
-        <h2>お問い合わせ</h2>
+        <h2>{t('contact.title')}</h2>
         {isSubmitted && (
-          <div className={styles.successMessage}>お問い合わせが送信されました。</div>
+          <div className={styles.successMessage}>{t('contact.successMessage')}</div>
         )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputContainer}>
             <input
-              {...register("name", { required: "お名前を入力してください。" })}
-              placeholder="お名前"
+              {...register("name", { required: t('contact.form.name') })}
+              placeholder={t('contact.form.name')}
             />
             {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
           </div>
@@ -95,19 +98,33 @@ const Contact = () => {
                   },
                 })}
                 type="email"
-                placeholder="メールアドレス"
+                placeholder={t('contact.form.email')}
               />
               {errors.emails?.[index]?.email && (
                 <p style={{ color: "red" }}>{errors.emails?.[index]?.email?.message}</p>
               )}
+
+              <input
+                {...register(`emails.${index}.confirmEmail`, {
+                  required: "確認用メールアドレスを入力してください。",
+                  validate: (value) => {
+                    const emails = watch(`emails.${index}.email`);
+                    return value === emails || "メールアドレスが一致しません。";
+                  }
+                })}
+                type="email"
+                placeholder={t('contact.form.confirmEmail')}
+              />
+              {errors.emails?.[index]?.confirmEmail && (
+                <p style={{ color: "red" }}>{errors.emails?.[index]?.confirmEmail?.message}</p>
+              )}
+
               {emailFields.length > 1 && (
-                <button type="button" onClick={() => removeEmail(index)}>メールアドレスを削除</button>
+                <button type="button" onClick={() => removeEmail(index)}>{t('contact.form.removeEmail')}</button>
               )}
             </div>
           ))}
-          <button type="button" onClick={() => appendEmail({ email: "", confirmEmail: "" })}>
-            メールアドレスを追加
-          </button>
+          <button type="button" onClick={() => appendEmail({ email: "", confirmEmail: "" })}>{t('contact.form.addEmail')}</button>
 
           {telFields.map((field, index) => (
             <div key={field.id} className={styles.inputContainer}>
@@ -130,19 +147,17 @@ const Contact = () => {
                   };
                   register(`tels.${index}.tel`).onChange(event);
                 }}
-                placeholder="電話番号"
+                placeholder={t('contact.form.phone')}
               />
               {errors.tels?.[index]?.tel && (
                 <p style={{ color: "red" }}>{errors.tels?.[index]?.tel?.message}</p>
               )}
               {telFields.length > 1 && (
-                <button type="button" onClick={() => removeTel(index)}>電話番号を削除</button>
+                <button type="button" onClick={() => removeTel(index)}>{t('contact.form.removePhone')}</button>
               )}
             </div>
           ))}
-          <button type="button" onClick={() => appendTel({ tel: "" })}>
-            電話番号を追加
-          </button>
+          <button type="button" onClick={() => appendTel({ tel: "" })}>{t('contact.form.addPhone')}</button>
 
           <div className={styles.inputContainer}>
             <input
@@ -157,7 +172,7 @@ const Contact = () => {
                   e.target.value = value;
                 }
               })}
-              placeholder="郵便番号（ハイフンなし）"
+              placeholder={t('contact.form.postalCode')}
               style={{ width: "50%" }}
             />
             {errors.postalCode && <p style={{ color: "red" }}>{errors.postalCode.message}</p>}
@@ -166,7 +181,7 @@ const Contact = () => {
           <div className={styles.inputContainer}>
             <input
               {...register("address", { required: "住所を入力してください。" })}
-              placeholder="住所"
+              placeholder={t('contact.form.address')}
             />
             {errors.address && <p style={{ color: "red" }}>{errors.address.message}</p>}
           </div>
@@ -174,11 +189,11 @@ const Contact = () => {
           <div className={styles.inputContainer}>
             <textarea
               {...register("message")}
-              placeholder="メッセージ"
+              placeholder={t('contact.form.message')}
               rows={6}
             />
           </div>
-          <button type="submit" disabled={isSubmitting}>登録する</button>
+          <button type="submit" disabled={isSubmitting}>{t('contact.form.submit')}</button>
         </form>
       </div>
     </section>
