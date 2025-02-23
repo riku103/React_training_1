@@ -1,6 +1,10 @@
 declare module 'react-router-hash-link' {
   import { LinkProps } from 'react-router-dom';
-  import * as React from 'react';
+  import { ComponentType } from 'react';
 
-  export class HashLink extends React.Component<LinkProps> {}
+  export interface HashLinkProps extends LinkProps {
+    smooth?: boolean;
+  }
+
+  export const HashLink: ComponentType<HashLinkProps>;
 }

@@ -46,19 +46,23 @@ const Header = ({
           <div className={styles.navContainer}>
             <ul className={isOpen ? styles.active : ""}>
               <li>
-                <Link to="/">{t('header.home')}</Link>
+                {window.location.pathname === '/' ? (
+                  <HashLink smooth to="/#top">{t('header.home')}</HashLink>
+                ) : (
+                  <Link to="/">{t('header.home')}</Link>
+                )}
               </li>
               <li>
                 <Link to="/about">{t('header.about')}</Link>
               </li>
               <li>
-                <HashLink to="/#features">{t('header.features')}</HashLink>
+                <HashLink smooth to="/#features">{t('header.features')}</HashLink>
               </li>
               <li>
-                <HashLink to="/#testimonials">{t('header.testimonials')}</HashLink>
+                <HashLink smooth to="/#testimonials">{t('header.testimonials')}</HashLink>
               </li>
               <li>
-                <HashLink to="/#contact">{t('header.contact')}</HashLink>
+                <HashLink smooth to="/#contact">{t('header.contact')}</HashLink>
               </li>
             </ul>
             <div className={styles.controls}>
