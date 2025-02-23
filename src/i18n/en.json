@@ -30,6 +30,7 @@
   },
   "contact": {
     "title": "Contact Us",
+    "successMessage": "Your message has been sent successfully.",
     "form": {
       "name": "Name",
       "email": "Email",
@@ -38,7 +39,23 @@
       "postalCode": "Postal Code",
       "address": "Address",
       "message": "Message",
-      "submit": "Submit"
+      "submit": "Submit",
+      "addEmail": "Add Email",
+      "removeEmail": "Remove",
+      "addPhone": "Add Phone",
+      "removePhone": "Remove"
+    },
+    "validation": {
+      "nameRequired": "Please enter your name.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "Please enter a valid email address.",
+      "confirmEmailRequired": "Please confirm your email address.",
+      "emailMismatch": "Email addresses do not match.",
+      "phoneRequired": "Please enter your phone number.",
+      "phoneInvalid": "Please enter a valid phone number.",
+      "postalCodeRequired": "Please enter your postal code.",
+      "postalCodeInvalid": "Please enter a 7-digit postal code.",
+      "addressRequired": "Please enter your address."
     }
   },
   "testimonials": {
