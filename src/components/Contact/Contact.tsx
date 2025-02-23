@@ -81,7 +81,7 @@ const Contact = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputContainer}>
             <input
-              {...register("name", { required: t('contact.form.name') })}
+              {...register("name", { required: t('contact.validation.nameRequired') })}
               placeholder={t('contact.form.name')}
             />
             {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
@@ -91,10 +91,10 @@ const Contact = () => {
             <div key={field.id} className={styles.inputContainer}>
               <input
                 {...register(`emails.${index}.email`, {
-                  required: "メールアドレスを入力してください。",
+                  required: t('contact.validation.emailRequired'),
                   pattern: {
                     value: /^\S+@\S+\.\S+$/,
-                    message: "有効なメールアドレスを入力してください。",
+                    message: t('contact.validation.emailInvalid'),
                   },
                 })}
                 type="email"
@@ -106,10 +106,10 @@ const Contact = () => {
 
               <input
                 {...register(`emails.${index}.confirmEmail`, {
-                  required: "確認用メールアドレスを入力してください。",
+                  required: t('contact.validation.confirmEmailRequired'),
                   validate: (value) => {
                     const emails = watch(`emails.${index}.email`);
-                    return value === emails || "メールアドレスが一致しません。";
+                    return value === emails || t('contact.validation.emailMismatch');
                   }
                 })}
                 type="email"
@@ -133,8 +133,8 @@ const Contact = () => {
                 defaultCountry="JP"
                 {...register(`tels.${index}.tel`, {
                   validate: (value) => {
-                    if (!value) return "電話番号を入力してください。";
-                    if (!isValidPhoneNumber(value)) return "有効な電話番号を入力してください。";
+                    if (!value) return t('contact.validation.phoneRequired');
+                    if (!isValidPhoneNumber(value)) return t('contact.validation.phoneInvalid');
                     return true;
                   }
                 })}
@@ -162,10 +162,10 @@ const Contact = () => {
           <div className={styles.inputContainer}>
             <input
               {...register("postalCode", {
-                required: "郵便番号を入力してください。",
+                required: t('contact.validation.postalCodeRequired'),
                 pattern: {
                   value: /^\d{7}$/,
-                  message: "郵便番号は7桁の数字で入力してください。",
+                  message: t('contact.validation.postalCodeInvalid'),
                 },
                 onChange: (e) => {
                   const value = e.target.value.replace(/[^\d]/g, "");
@@ -180,7 +180,7 @@ const Contact = () => {
 
           <div className={styles.inputContainer}>
             <input
-              {...register("address", { required: "住所を入力してください。" })}
+              {...register("address", { required: t('contact.validation.addressRequired') })}
               placeholder={t('contact.form.address')}
             />
             {errors.address && <p style={{ color: "red" }}>{errors.address.message}</p>}

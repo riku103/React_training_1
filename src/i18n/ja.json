@@ -30,6 +30,7 @@
   },
   "contact": {
     "title": "お問い合わせ",
+    "successMessage": "送信が完了しました。",
     "form": {
       "name": "お名前",
       "email": "メールアドレス",
@@ -38,7 +39,23 @@
       "postalCode": "郵便番号",
       "address": "住所",
       "message": "メッセージ",
-      "submit": "登録する"
+      "submit": "登録する",
+      "addEmail": "メールアドレスを追加",
+      "removeEmail": "削除",
+      "addPhone": "電話番号を追加",
+      "removePhone": "削除"
+    },
+    "validation": {
+      "nameRequired": "お名前を入力してください。",
+      "emailRequired": "メールアドレスを入力してください。",
+      "emailInvalid": "有効なメールアドレスを入力してください。",
+      "confirmEmailRequired": "確認用メールアドレスを入力してください。",
+      "emailMismatch": "メールアドレスが一致しません。",
+      "phoneRequired": "電話番号を入力してください。",
+      "phoneInvalid": "有効な電話番号を入力してください。",
+      "postalCodeRequired": "郵便番号を入力してください。",
+      "postalCodeInvalid": "郵便番号は7桁の数字で入力してください。",
+      "addressRequired": "住所を入力してください。"
     }
   },
   "testimonials": {
