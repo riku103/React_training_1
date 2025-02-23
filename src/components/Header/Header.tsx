@@ -2,9 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
 import styles from "./Header.module.css";
+import { useTranslation } from 'react-i18next';
 
-const Header = ({ changeDarkMode }: { changeDarkMode?: () => void }) => {
+const Header = ({
+  changeDarkMode,
+  currentLang = 'ja',
+  onChangeLang
+}: {
+  changeDarkMode?: () => void,
+  currentLang?: string,
+  onChangeLang?: (lang: string) => void
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -33,29 +43,39 @@ const Header = ({ changeDarkMode }: { changeDarkMode?: () => void }) => {
             {isOpen ? "✕" : "☰"}
           </div>
           <div className={styles.navContainer}>
-          <ul className={isOpen ? styles.active : ""}>
-            <li>
-              <Link to="/">ホーム</Link>
-            </li>
-            <li>
-              <Link to="/about">私たちについて</Link>
-            </li>
-            <li>
-              <HashLink to="/#features">特徴</HashLink>
-            </li>
-            <li>
-              <HashLink to="/#testimonials">お客様の声</HashLink>
-            </li>
-            <li>
-              <HashLink to="/#contact">お問い合わせ</HashLink>
-            </li>
-          </ul>
-          {changeDarkMode && (
-            <div className={styles.toggleButton}>
-              <input id="toggle" type="checkbox" onChange={changeDarkMode} />
-              <label htmlFor="toggle" />
+            <ul className={isOpen ? styles.active : ""}>
+              <li>
+                <Link to="/">{t('header.home')}</Link>
+              </li>
+              <li>
+                <Link to="/about">{t('header.about')}</Link>
+              </li>
+              <li>
+                <HashLink to="/#features">{t('header.features')}</HashLink>
+              </li>
+              <li>
+                <HashLink to="/#testimonials">{t('header.testimonials')}</HashLink>
+              </li>
+              <li>
+                <HashLink to="/#contact">{t('header.contact')}</HashLink>
+              </li>
+            </ul>
+            <div className={styles.controls}>
+              {changeDarkMode && (
+                <div className={styles.toggleButton}>
+                  <input id="toggle" type="checkbox" onChange={changeDarkMode} />
+                  <label htmlFor="toggle" />
+                </div>
+              )}
+              {onChangeLang && (
+                <button
+                  className={styles.langButton}
+                  onClick={() => onChangeLang(currentLang === 'ja' ? 'en' : 'ja')}
+                >
+                  {currentLang === 'ja' ? 'EN' : '日本語'}
+                </button>
+              )}
             </div>
-          )}
           </div>
         </nav>
       </div>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Header from '../Header/Header';
 import Hero from '../Hero/Hero';
 import Features from '../Features/Features';
@@ -8,7 +9,10 @@ import Footer from '../Footer/Footer';
 
 // ホームページのコンポーネント
 function Home() {
+  const { i18n } = useTranslation();
+
   const [darkMode, setDarkMode] = useState(false);
+  const [currentLang, setCurrentLang] = useState(i18n.language);
 
   const features = [
     {
@@ -50,9 +54,18 @@ function Home() {
     setDarkMode(!darkMode);
   }
 
+  const handleChangeLang = (lang: string) => {
+    i18n.changeLanguage(lang);
+    setCurrentLang(lang);
+  };
+
   return (
     <div className={`App ${darkMode ? 'dark' : 'light'}`}>
-      <Header changeDarkMode={changeDarkMode} />
+      <Header
+        currentLang={currentLang}
+        changeDarkMode={changeDarkMode}
+        onChangeLang={handleChangeLang}
+      />
 
       <main>
         <Hero />
