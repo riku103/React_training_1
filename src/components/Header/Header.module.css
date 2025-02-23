@@ -139,18 +139,3 @@ nav ul li a:hover {
   align-items: center;
   gap: 1rem;
 }
-
-.langButton {
-  border: 1px solid currentColor;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0.5rem 1rem;
-  min-width: 70px;
-  background: transparent;
-  cursor: pointer;
-  color: inherit;
-}
-
-.langButton:hover {
-  opacity: 0.8;
-}

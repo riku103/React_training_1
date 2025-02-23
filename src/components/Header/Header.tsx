@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
 import styles from "./Header.module.css";
 import { useTranslation } from 'react-i18next';
+import LanguageButton from '../common/LanguageButton';
 
 const Header = ({
   changeDarkMode,
@@ -68,12 +69,10 @@ const Header = ({
                 </div>
               )}
               {onChangeLang && (
-                <button
-                  className={styles.langButton}
-                  onClick={() => onChangeLang(currentLang === 'ja' ? 'en' : 'ja')}
-                >
-                  {currentLang === 'ja' ? 'EN' : '日本語'}
-                </button>
+                <LanguageButton
+                  currentLang={currentLang}
+                  onChangeLang={onChangeLang}
+                />
               )}
             </div>
           </div>

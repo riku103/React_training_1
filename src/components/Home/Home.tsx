@@ -41,7 +41,10 @@ function Home() {
         <Contact />
       </main>
 
-      <Footer />
+      <Footer
+        currentLang={currentLang}
+        onChangeLang={handleChangeLang}
+      />
     </div>
   );
 }
