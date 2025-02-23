@@ -40,5 +40,22 @@
       "message": "Message",
       "submit": "Submit"
     }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "items": {
+      "1": {
+        "text": "This product has dramatically changed my life. Every day becomes more enjoyable.",
+        "author": "Hanako Tanaka"
+      },
+      "2": {
+        "text": "The ease of use is outstanding. It's incomparable to other products.",
+        "author": "Taro Sato"
+      },
+      "3": {
+        "text": "The quality of support is excellent. It's reassuring to know we can rely on them whenever we need help.",
+        "author": "Ichiro Suzuki"
+      }
+    }
   }
 }
