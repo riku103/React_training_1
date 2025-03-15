@@ -5,10 +5,43 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { PostalCode } from "../../types/postalCode";
 import { useTranslation } from 'react-i18next';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 const Contact = () => {
-  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, setValue, watch } = useForm({
+  const { t } = useTranslation();
+
+  const formSchema = z.object({
+    name: z.string().min(1, t('contact.validation.nameRequired')),
+    emails: z.array(z.object({
+      email: z.string()
+        .min(1, t('contact.validation.emailRequired'))
+        .email(t('contact.validation.emailInvalid')),
+      confirmEmail: z.string()
+        .min(1, t('contact.validation.confirmEmailRequired'))
+    })).refine((data) => {
+      return data.every(item => item.email === item.confirmEmail);
+    }, {
+      message: t('contact.validation.emailMismatch'),
+      path: ["emails"]
+    }),
+    tels: z.array(z.object({
+      tel: z.string()
+        .min(1, t('contact.validation.phoneRequired'))
+        .refine((val) => isValidPhoneNumber(val), t('contact.validation.phoneInvalid'))
+    })),
+    postalCode: z.string()
+      .min(1, t('contact.validation.postalCodeRequired'))
+      .regex(/^\d{7}$/, t('contact.validation.postalCodeInvalid')),
+    address: z.string().min(1, t('contact.validation.addressRequired')),
+    message: z.string().optional()
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
+
+  const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, setValue, watch } = useForm<FormValues>({
     mode: "onChange",
+    resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       emails: [{ email: "", confirmEmail: "" }],
@@ -69,8 +102,6 @@ const Contact = () => {
     reset();
   };
 
-  const { t } = useTranslation();
-
   return (
     <section id="contact" className={styles.contact}>
       <div className={styles.sectionContainer}>
@@ -81,7 +112,7 @@ const Contact = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputContainer}>
             <input
-              {...register("name", { required: t('contact.validation.nameRequired') })}
+              {...register("name")}
               placeholder={t('contact.form.name')}
             />
             {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
@@ -90,13 +121,7 @@ const Contact = () => {
           {emailFields.map((field, index) => (
             <div key={field.id} className={styles.inputContainer}>
               <input
-                {...register(`emails.${index}.email`, {
-                  required: t('contact.validation.emailRequired'),
-                  pattern: {
-                    value: /^\S+@\S+\.\S+$/,
-                    message: t('contact.validation.emailInvalid'),
-                  },
-                })}
+                {...register(`emails.${index}.email`)}
                 type="email"
                 placeholder={t('contact.form.email')}
               />
@@ -105,13 +130,7 @@ const Contact = () => {
               )}
 
               <input
-                {...register(`emails.${index}.confirmEmail`, {
-                  required: t('contact.validation.confirmEmailRequired'),
-                  validate: (value) => {
-                    const emails = watch(`emails.${index}.email`);
-                    return value === emails || t('contact.validation.emailMismatch');
-                  }
-                })}
+                {...register(`emails.${index}.confirmEmail`)}
                 type="email"
                 placeholder={t('contact.form.confirmEmail')}
               />
@@ -131,13 +150,7 @@ const Contact = () => {
               <PhoneInput
                 international
                 defaultCountry="JP"
-                {...register(`tels.${index}.tel`, {
-                  validate: (value) => {
-                    if (!value) return t('contact.validation.phoneRequired');
-                    if (!isValidPhoneNumber(value)) return t('contact.validation.phoneInvalid');
-                    return true;
-                  }
-                })}
+                {...register(`tels.${index}.tel`)}
                 onChange={(value) => {
                   const event = {
                     target: {
@@ -162,11 +175,6 @@ const Contact = () => {
           <div className={styles.inputContainer}>
             <input
               {...register("postalCode", {
-                required: t('contact.validation.postalCodeRequired'),
-                pattern: {
-                  value: /^\d{7}$/,
-                  message: t('contact.validation.postalCodeInvalid'),
-                },
                 onChange: (e) => {
                   const value = e.target.value.replace(/[^\d]/g, "");
                   e.target.value = value;
@@ -180,7 +188,7 @@ const Contact = () => {
 
           <div className={styles.inputContainer}>
             <input
-              {...register("address", { required: t('contact.validation.addressRequired') })}
+              {...register("address")}
               placeholder={t('contact.form.address')}
             />
             {errors.address && <p style={{ color: "red" }}>{errors.address.message}</p>}
